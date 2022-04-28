@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NewCampusView = (props) => {
-    const { handleChange, handleSubmit, handleCampus, handleAddress, handleDescription, handleId } = props;
+    const { handleSubmit, handleCampus, handleAddress, handleDescription, handleId } = props;
     const classes = useStyles()
 
     return (
