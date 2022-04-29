@@ -35,8 +35,7 @@ const useStyles = makeStyles(() => ({
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const { campus, students, deleteStudent } = props;
-  console.log(campus.students)
+  const { campus, fetchCampus, deleteStudent } = props;
   const classes = useStyles();
   if (campus.students.length === 0) {
     return (
@@ -47,8 +46,8 @@ const CampusView = (props) => {
           <p>{campus.address}</p>
           <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
           <p>{campus.description}</p>
+          <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>There are currently no enrolled student(s)</Typography>
         </div>
-        <h1>NOTE: There are currently no students enrolled in this university</h1>
       </div>
     );
   }
@@ -71,13 +70,14 @@ const CampusView = (props) => {
                   <li>{name}</li>
                 </Link>
                 <br />
-                <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
+                {/* Using two functions, deleting the student from the database then refreshing it after it gets deleted */}
+                <button onClick={() => { deleteStudent(student.id); fetchCampus(campus.id) }}>Delete Student</button>
                 <br />
                 <br />
-                {/* <button>Add Student</button><button style={{marginLeft: '10px'}}>Delete</button> */}
               </div>
             );
-          })}
+          }
+          )}
           <br />
         </div>
       </div>
