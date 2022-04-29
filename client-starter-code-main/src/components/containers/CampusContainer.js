@@ -15,7 +15,6 @@ import { CampusView } from "../views";
 class CampusContainer extends Component {
   // Get the specific campus data from back-end database
   componentDidMount() {
-    //this.props.fetchAllStudents();
     // Get campus ID from URL (API link)
     this.props.fetchCampus(this.props.match.params.id);
   }
@@ -25,7 +24,11 @@ class CampusContainer extends Component {
     return (
       <div>
         <Header />
-        <CampusView campus={this.props.campus} deleteStudent = {this.props.deleteStudent} />
+        <CampusView
+          campus={this.props.campus}
+          deleteStudent={this.props.deleteStudent}
+          fetchCampus={this.props.fetchCampus}
+        />
       </div>
     );
   }
@@ -36,7 +39,6 @@ class CampusContainer extends Component {
 // The "mapState" is called when the Store State changes, and it returns a data object of "campus".
 const mapState = (state) => {
   return {
-    allStudents: state.allStudents,
     campus: state.campus,  // Get the State object from Reducer "campus"
   };
 };
