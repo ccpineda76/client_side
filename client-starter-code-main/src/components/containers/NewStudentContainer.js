@@ -54,7 +54,6 @@ class NewStudentContainer extends Component {
       redirect: true,
       redirectId: newStudent.id
     });
-    console.log(newStudent)
   }
 
   // Unmount when the component is being removed from the DOM:

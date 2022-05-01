@@ -6,16 +6,17 @@ passes data (if any) as props to the corresponding View component.
 If needed, it also defines the component's "connect" function.
 ================================================== */
 import Header from './Header';
-import React, { Component } from "react";
+import { Component } from "react";
 import { connect } from "react-redux";
 import { fetchCampusThunk, deleteStudentThunk, fetchAllStudentsThunk } from "../../store/thunks";
 
-import { CampusView } from "../views";
+import CampusView  from "../views/CampusView";
 
 class CampusContainer extends Component {
   // Get the specific campus data from back-end database
   componentDidMount() {
     // Get campus ID from URL (API link)
+    this.props.fetchAllStudents();
     this.props.fetchCampus(this.props.match.params.id);
   }
 
@@ -28,6 +29,7 @@ class CampusContainer extends Component {
           campus={this.props.campus}
           deleteStudent={this.props.deleteStudent}
           fetchCampus={this.props.fetchCampus}
+          students={this.props.allStudents}
         />
       </div>
     );
@@ -40,6 +42,7 @@ class CampusContainer extends Component {
 const mapState = (state) => {
   return {
     campus: state.campus,  // Get the State object from Reducer "campus"
+    allStudents: state.allStudents,
   };
 };
 // 2. The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.

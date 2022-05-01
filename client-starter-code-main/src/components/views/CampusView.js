@@ -35,9 +35,17 @@ const useStyles = makeStyles(() => ({
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const { campus, fetchCampus, deleteStudent } = props;
+  const { campus, deleteStudent, students } = props;
   const classes = useStyles();
-  if (campus.students.length === 0) {
+  const currentcampus = [];
+
+  for (let i = 0; i < students.length; i++) {
+    if (students[i].campusId == campus.id) {
+      currentcampus.push(students[i])
+    }
+  }
+
+  if (currentcampus.length == 0) { //if the campus list is empty, give a message
     return (
       <div>
         <h1>{campus.name}</h1>
@@ -48,41 +56,48 @@ const CampusView = (props) => {
           <p>{campus.description}</p>
           <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>There are currently no enrolled student(s)</Typography>
         </div>
+        <Link to={`/editcampus/${campus.id}`}>
+          <button>Edit Campus</button>
+        </Link>
       </div>
     );
   }
   // Render a single Campus view with list of its students
-  else {
-    return (
-      <div>
-        <h1>{campus.name}</h1>
-        <div className={classes.formContainer}>
-          <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
-          <p>{campus.address}</p>
-          <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
-          <p>{campus.description}</p>
-          <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Enrolled Student(s)</Typography>
-          {campus.students.map(student => {
+  return (
+    <div>
+      <h1>{campus.name}</h1>
+      <div className={classes.formContainer}>
+        <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
+        <p>{campus.address}</p>
+        <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
+        <p>{campus.description}</p>
+        <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Enrolled Student(s)</Typography>
+        {students.map((student) => {
+          if (student.campusId === campus.id) {
             let name = student.firstname + " " + student.lastname;
             return (
               <div key={student.id}>
                 <Link to={`/student/${student.id}`}>
-                  <li>{name}</li>
+                  <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
                 </Link>
-                <br />
-                {/* Using two functions, deleting the student from the database then refreshing it after it gets deleted */}
-                <button onClick={() => { deleteStudent(student.id); fetchCampus(campus.id) }}>Delete Student</button>
+                <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
                 <br />
                 <br />
               </div>
             );
           }
-          )}
-          <br />
-        </div>
+          else if (students.length == 0) {
+            return (<div>Something</div>);
+          }
+        }
+        )}
+        <br />
+        <Link to={`/editcampus/${campus.id}`}>
+          <button>Edit Campus</button>
+        </Link>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default CampusView;
