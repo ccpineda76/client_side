@@ -33,8 +33,9 @@ const NewCampusView = (props) => {
 
     return (
         <div>
-            <h1>New Student</h1>
-
+            <br/>
+            <br/>
+            <br/>
             <div className={classes.root}>
                 <div className={classes.formContainer}>
                     <div className={classes.formTitle}>
