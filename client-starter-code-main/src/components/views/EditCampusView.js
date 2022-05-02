@@ -1,6 +1,7 @@
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
     formContainer: {
@@ -28,10 +29,15 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EditCampusView = (props) => {
-    const { handleSubmit, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, addStudent, campus, deleteStudent, fetchCampus } = props;
+    const { handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, addStudent, campus, deleteStudent, fetchCampus } = props;
     const classes = useStyles()
-
-    if (campus.students.length === 0) {
+    const currentcampus = [];
+    for (let i = 0; i < students.length; i++) {
+        if (students[i].campusId === campus.id) {
+            currentcampus.push(students[i])
+        }
+    }
+    if (currentcampus.length === 0) {
         return (
             <div>
                 <br />
@@ -88,6 +94,33 @@ const EditCampusView = (props) => {
                             <br />
                             <br />
                         </form>
+                        <div className={classes.formTitle}>
+                            <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e' }}>
+                                Add Student
+                            </Typography>
+                        </div>
+                        {/* A place if user wants to add a student  */}
+                        <form style={{ textAlign: 'center' }} onSubmit={(e) => { handleStudentSubmit(e); fetchCampus(campus.id) }}>
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
+                            <input type="text" name="firstname" onChange={(e) => handleFirstName(e)} />
+                            <br />
+                            <br />
+
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Last Name: </label>
+                            <input type="text" name="lastname" onChange={(e) => handleLastName(e)} />
+                            <br />
+                            <br />
+
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus ID: {campus.id}</label>
+                            <br />
+                            <br />
+
+                            <Button variant="contained" color="primary" type="submit">
+                                Submit
+                            </Button>
+                            <br />
+                            <br />
+                        </form>
                     </div>
                 </div>
             </div>
@@ -111,13 +144,17 @@ const EditCampusView = (props) => {
                         <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
                         <p>{campus.description}</p>
                         <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Enrolled Student(s)</Typography>
-                        {campus.students.map(student => {
-                            let name = student.firstname + " " + student.lastname;
-                            return (
-                                <div key={student.id}>
-                                    <li>{name}</li>
-                                </div>
-                            );
+                        {students.map((student) => {
+                            if (student.campusId === campus.id) {
+                                let name = student.firstname + " " + student.lastname;
+                                return (
+                                    <div key={student.id}>
+                                        <Link to={`/student/${student.id}`}>
+                                            <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
+                                        </Link>
+                                    </div>
+                                );
+                            }
                         }
                         )}
                         <br />
@@ -166,18 +203,20 @@ const EditCampusView = (props) => {
                                 Student(s)
                             </Typography>
                         </div>
-                        {campus.students.map(student => {
-                            let name = student.firstname + " " + student.lastname;
-                            return (
-                                <div key={student.id}>
-                                    <li>{name}</li>
-                                    <br />
-                                    {/* Using two functions, deleting the student from the database then refreshing it after it gets deleted */}
-                                    <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
-                                    <br />
-                                    <br />
-                                </div>
-                            );
+                        {students.map((student) => {
+                            if (student.campusId === campus.id) {
+                                let name = student.firstname + " " + student.lastname;
+                                return (
+                                    <div key={student.id}>
+                                        <Link to={`/student/${student.id}`}>
+                                            <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
+                                        </Link>
+                                        <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
+                                        <br />
+                                        <br />
+                                    </div>
+                                );
+                            }
                         }
                         )}
                         <div className={classes.formTitle}>
@@ -186,7 +225,7 @@ const EditCampusView = (props) => {
                             </Typography>
                         </div>
                         {/* A place if user wants to add a student  */}
-                        <form style={{ textAlign: 'center' }} onSubmit={(e) => {handleStudentSubmit(e); fetchCampus(campus.id)}}>
+                        <form style={{ textAlign: 'center' }} onSubmit={(e) => { handleStudentSubmit(e); fetchCampus(campus.id) }}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleFirstName(e)} />
                             <br />

@@ -55,7 +55,7 @@ class NewCampusContainer extends Component {
 
         let campus = {
             name: this.state.name,
-            campusId: this.state.campusId,
+            id: this.state.campusId,
             address: this.state.address,
             description: this.state.description,
             students: this.state.students
