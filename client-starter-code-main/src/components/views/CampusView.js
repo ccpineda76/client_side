@@ -35,17 +35,17 @@ const useStyles = makeStyles(() => ({
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const { campus, deleteStudent, students } = props;
+  const { campus, deleteStudent, students, deleteCampus } = props;
   const classes = useStyles();
   const currentcampus = [];
 
   for (let i = 0; i < students.length; i++) {
-    if (students[i].campusId == campus.id) {
+    if (students[i].campusId === campus.id) {
       currentcampus.push(students[i])
     }
   }
 
-  if (currentcampus.length == 0) { //if the campus list is empty, give a message
+  if (currentcampus.length === 0) { //if the campus list is empty, give a message
     return (
       <div>
         <h1>{campus.name}</h1>
@@ -56,6 +56,9 @@ const CampusView = (props) => {
           <p>{campus.description}</p>
           <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>There are currently no enrolled student(s)</Typography>
         </div>
+        <Link to={`/campuses`}>
+          <button onClick={() => deleteCampus(campus.id)}>Delete Campus</button>
+        </Link>
         <Link to={`/editcampus/${campus.id}`}>
           <button>Edit Campus</button>
         </Link>
@@ -86,12 +89,12 @@ const CampusView = (props) => {
               </div>
             );
           }
-          else if (students.length == 0) {
-            return (<div>Something</div>);
-          }
         }
         )}
         <br />
+        <Link to={`/campuses`}>
+          <button onClick={() => deleteCampus(campus.id)}>Delete Campus</button>
+        </Link>
         <Link to={`/editcampus/${campus.id}`}>
           <button>Edit Campus</button>
         </Link>

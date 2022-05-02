@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import EditCampusView from '../views/EditCampusView';
-import { addCampusThunk, deleteCampusThunk, fetchCampusThunk, addStudentThunk, deleteStudentThunk } from '../../store/thunks';
+import { fetchAllStudentsThunk, addCampusThunk, deleteCampusThunk, fetchCampusThunk, addStudentThunk, deleteStudentThunk, editCampusThunk } from '../../store/thunks';
 
 class EditCampusContainer extends Component {
     constructor(props) {
@@ -99,7 +99,7 @@ class EditCampusContainer extends Component {
             students: this.state.students
         };
         //UPDATING BACKEND WITH NEW CAMPUS 
-        let newCampus = await this.props.addCampus(campus);
+        let newCampus = await this.props.editCampus(campus);
 
         this.setState({
             name: "",
@@ -139,6 +139,8 @@ class EditCampusContainer extends Component {
                     handleStudentSubmit={this.handleStudentSubmit}
                     handleFirstName={this.handleFirstName}
                     handleLastName={this.handleLastName}
+                    students={this.props.allStudents}
+                    editCampus={this.props.editCampus}
                 />
             </div>
         );
@@ -147,16 +149,19 @@ class EditCampusContainer extends Component {
 
 const mapState = (state) => {
     return {
+        allStudents: state.allStudents,
         campus: state.campus,  // Get the State object from Reducer "campus"
     };
 };
 
 const mapDispatch = (dispatch) => {
     return ({
+        fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
         addCampus: (campus) => dispatch(addCampusThunk(campus)),
         deleteCampus: (campusid) => dispatch(deleteCampusThunk(campusid)),
         fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
         deleteStudent: (studentId) => dispatch(deleteStudentThunk(studentId)),
+        editCampus:(campusid) => dispatch(editCampusThunk(campusid)),
         addStudent: (student) => dispatch(addStudentThunk(student)),
     })
 }
