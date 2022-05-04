@@ -10,8 +10,10 @@ class EditCampusContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstname: "",
-            lastname: "",
+            firstname: null,
+            lastname: null,
+            email: null,
+            gpa: null,
             name: "",
             campusId: null,
             address: "",
@@ -26,6 +28,17 @@ class EditCampusContainer extends Component {
         this.props.fetchCampus(this.props.match.params.id);
     }
 
+    componentWillUnmount() {
+        this.setState({
+            firstname: null,
+            lastname: null,
+            campusId: null,
+            email: null,
+            gpa: null,
+            redirect: false, 
+            redirectId: null
+        });
+    }
 
     //Event handler for campus
     handleCampus = event => {
@@ -65,13 +78,32 @@ class EditCampusContainer extends Component {
         });
     }
 
+    handleEmail = event => {
+        this.setState({
+            email: event.target.value
+        });
+    }
+
+    handleGPA = event => {
+        this.setState({
+            gpa: event.target.value
+        });
+    }
+
     // Take action after user click the submit button
     handleStudentSubmit = async event => {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
+        if (this.state.firstname == null || this.state.lastname == null || this.state.email == null || this.state.gpa == null) {
+            alert("Only Campus ID can be empty.  Please fill out all the fields");
+            return;
+        }
+
         let student = {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
-            campusId: this.props.campus.id
+            campusId: this.props.campus.id,
+            email: this.state.email,
+            gpa: this.state.gpa,
         };
 
         // Add new student in back-end database
@@ -79,13 +111,33 @@ class EditCampusContainer extends Component {
 
         // Update state, and trigger redirect to show the new student
         this.setState({
-            firstname: "",
-            lastname: "",
+            firstname: null,
+            lastname: null,
             campusId: null,
-            redirect: false,
-            redirectId: null
+            email: null,
+            gpa: null,
         });
-        this.props.fetchCampus(this.props.match.params.id);
+        // event.preventDefault();  // Prevent browser reload/refresh after submit.
+        // let student = {
+        //     firstname: this.state.firstname,
+        //     lastname: this.state.lastname,
+        //     campusId: this.props.campus.id,
+        //     email: this.state.email,
+        //     gpa: this.state.gpa
+        // };
+
+        // // Add new student in back-end database
+        // let newStudent = await this.props.addStudent(student);
+
+        // // Update state, and trigger redirect to show the new student
+        // this.setState({
+        //     firstname: "",
+        //     lastname: "",
+        //     campusId: null,
+        //     redirect: false,
+        //     redirectId: null
+        // });
+        // this.props.fetchCampus(this.props.match.params.id);
 
     }
 
@@ -111,9 +163,10 @@ class EditCampusContainer extends Component {
             students: []
         });
     }
-    componentWillUnmount() {
-        this.setState({ redirect: false, redirectId: null });
-    }
+
+    // componentWillUnmount() {
+    //     this.setState({ redirect: false, redirectId: null });
+    // }
 
     render() {
         // Redirect to new student's page after submit
@@ -141,6 +194,8 @@ class EditCampusContainer extends Component {
                     handleLastName={this.handleLastName}
                     students={this.props.allStudents}
                     editCampus={this.props.editCampus}
+                    handleEmail={this.handleEmail}
+                    handleGPA={this.handleGPA}
                 />
             </div>
         );
@@ -161,7 +216,7 @@ const mapDispatch = (dispatch) => {
         deleteCampus: (campusid) => dispatch(deleteCampusThunk(campusid)),
         fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
         deleteStudent: (studentId) => dispatch(deleteStudentThunk(studentId)),
-        editCampus:(campusid) => dispatch(editCampusThunk(campusid)),
+        editCampus: (campusid) => dispatch(editCampusThunk(campusid)),
         addStudent: (student) => dispatch(addStudentThunk(student)),
     })
 }

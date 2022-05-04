@@ -6,7 +6,6 @@ It constructs a React component to display the all students view page.
 ================================================== */
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(() => ({
   formContainer: {
@@ -34,7 +33,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const AllStudentsView = (props) => {
-  const { students, deleteStudent } = props;
+  const { students, deleteStudent, editStudent } = props;
   // If there is no student, display a message
   const classes = useStyles();
   if (!students.length) {

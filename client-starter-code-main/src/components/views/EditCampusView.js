@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EditCampusView = (props) => {
-    const { handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, addStudent, campus, deleteStudent, fetchCampus } = props;
+    const { handleGPA, handleEmail, handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, campus, deleteStudent, fetchCampus } = props;
     const classes = useStyles()
     const currentcampus = [];
     for (let i = 0; i < students.length; i++) {
@@ -112,6 +112,16 @@ const EditCampusView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus ID: {campus.id}</label>
+                            <br />
+                            <br />
+
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
+                            <input type="text" name="campusId" onChange={(e) => handleEmail(e)} />
+                            <br />
+                            <br />
+
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
+                            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 
@@ -237,6 +247,16 @@ const EditCampusView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus ID: {campus.id}</label>
+                            <br />
+                            <br />
+
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>Email: </label>
+                            <input type="text" name="campusId" onChange={(e) => handleEmail(e)} />
+                            <br />
+                            <br />
+
+                            <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
+                            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 
