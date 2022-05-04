@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const NewCampusView = (props) => {
-    const { handleSubmit, handleCampus, handleAddress, handleDescription, handleId } = props;
+    const { handleSubmit, handleCampus, handleAddress, handleDescription} = props;
     const classes = useStyles()
 
     return (
@@ -56,11 +56,6 @@ const NewCampusView = (props) => {
 
                         <label style={{ color: '#11153e', fontWeight: 'bold' }}>Description: </label>
                         <input type="text" name="campusId" onChange={(e) => handleDescription(e)} />
-                        <br />
-                        <br />
-
-                        <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus ID number: </label>
-                        <input type="text" name="campusId" onChange={(e) => handleId(e)} />
                         <br />
                         <br />
 

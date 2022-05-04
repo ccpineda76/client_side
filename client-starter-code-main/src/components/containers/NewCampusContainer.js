@@ -10,10 +10,9 @@ class NewCampusContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            campusId: null,
-            address: "",
-            description: "",
+            name: null,
+            address: null,
+            description: null,
             redirect: false,
             redirectId: null,
             students: []
@@ -52,27 +51,28 @@ class NewCampusContainer extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
+        if (this.state.name == null || this.state.address == null || this.state.description == null) {
+            alert("You left a field empty.  Please fill out all fields")
+        }
+        else {
+            let campus = {
+                name: this.state.name,
+                address: this.state.address,
+                description: this.state.description,
+                students: this.state.students
+            };
+            //UPDATING BACKEND WITH NEW CAMPUS 
+            let newCampus = await this.props.addCampus(campus);
 
-        let campus = {
-            name: this.state.name,
-            id: this.state.campusId,
-            address: this.state.address,
-            description: this.state.description,
-            students: this.state.students
-        };
-        //UPDATING BACKEND WITH NEW CAMPUS 
-        let newCampus = await this.props.addCampus(campus);
-
-        this.setState({
-            name: "",
-            campusId: null,
-            address: "",
-            description: "",
-            redirect: true,
-            redirectId: newCampus.id,
-            students: []
-        });
-        console.log(newCampus.id)
+            this.setState({
+                name: "",
+                address: "",
+                description: "",
+                redirect: true,
+                redirectId: newCampus.id,
+                students: []
+            });
+        }
     }
     componentWillUnmount() {
         this.setState({ redirect: false, redirectId: null });

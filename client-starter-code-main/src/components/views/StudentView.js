@@ -34,44 +34,71 @@ const useStyles = makeStyles(() => ({
 }));
 
 const StudentView = (props) => {
-  const { student, deleteStudent } = props;
+  const { student, pupil, deletion, allStudents } = props;
   const classes = useStyles();
   // Render a single Student view 
   if (student.campus !== null) {
     return (
       <div>
-        <div className={classes.formContainer} >
-          <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
-          <p>{student.firstname + " " + student.lastname}</p>
-          <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>
-            This Student is enrolled at:
-          </Typography>
-          <Link to={`/campus/${student.campus.id}`}>
-            <p>{student.campus.name}</p>
-          </Link>
-          <br />
-        </div>
-        <br/>
-        <Link to={`/students`}>
-          <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
-        </Link>
+        <h1>{pupil}</h1>
+        {allStudents.map((now_student) => {
+          if (student.id === now_student.id) {
+            console.log(now_student);
+            console.log(student)
+            return (
+              <div className={classes.formContainer} >
+                <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
+                <p>{now_student.firstname + " " + now_student.lastname}</p>
+                <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>
+                  This Student is enrolled at:
+                </Typography>
+                <Link to={`/campus/${student.campus.id}`}>
+                  <p>{student.campus.name}</p>
+                </Link>
+                <br />
+                <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Campus ID: </div>
+                <div>{student.campus.id}</div>
+                <br />
+                <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Student Email: </div>
+                <div>{now_student.email}</div>
+                <br />
+                <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Grade Point Average: </div>
+                <div>{now_student.gpa}</div>
+                <br />
+                <br />
+                <button onClick={() => deletion(now_student.id)}>Delete Student</button>
+              </div>
+            )
+          }
+        })}
       </div>
     );
   }
   else {
     return (
       <div>
-        <div className={classes.formContainer} >
-          <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
-          <p>{student.firstname + " " + student.lastname}</p>
-          <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Campus: </div>
-          <div>This student is not enrolled in a campus</div>
-          <br />
-        </div>
-        <br/>
-        <Link to={`/students`}>
-          <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
-        </Link>
+        <h1>{pupil}</h1>
+        {allStudents.map((now_student) => {
+          if (student.id === now_student.id) {
+            return (
+              <div className={classes.formContainer} >
+                <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
+                <p>{now_student.firstname + " " + now_student.lastname}</p>
+                <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Campus: </div>
+                <div>This student is not enrolled in a campus</div>
+                <br />
+                <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Student Email: </div>
+                <div>{now_student.email}</div>
+                <br />
+                <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Grade Point Average: </div>
+                <div>{now_student.gpa}</div>
+                <br />
+                <br />
+                <button onClick={() => deletion(now_student.id)}>Delete Student</button>
+              </div>
+            )
+          }
+        })}
       </div>
     );
   }

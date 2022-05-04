@@ -8,17 +8,35 @@ If needed, it also defines the component's "connect" function.
 import Header from './Header';
 import { Component } from "react";
 import { connect } from "react-redux";
-import { deleteCampusThunk, fetchCampusThunk, deleteStudentThunk, fetchAllStudentsThunk } from "../../store/thunks";
+import { fetchAllCampusesThunk, deleteCampusThunk, fetchCampusThunk, deleteStudentThunk, fetchAllStudentsThunk } from "../../store/thunks";
 
-import CampusView  from "../views/CampusView";
+import CampusView from "../views/CampusView";
 
 class CampusContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      university: null
+    }
+  }
   // Get the specific campus data from back-end database
   componentDidMount() {
     // Get campus ID from URL (API link)
+    this.props.fetchAllCampuses();
     this.props.fetchAllStudents();
     this.props.fetchCampus(this.props.match.params.id);
   }
+
+  componentWillUnmount() {
+    this.setState({ university: null });
+  }
+
+  deletion = (id) => {
+    this.props.deleteCampus(id);
+    this.setState({ university: "Campus Successfully Deleted" });
+  }
+
+
 
   // Render a Campus view by passing campus data as props to the corresponding View component
   render() {
@@ -26,16 +44,20 @@ class CampusContainer extends Component {
       <div>
         <Header />
         <CampusView
+          university={this.state.university}
           campus={this.props.campus}
           deleteStudent={this.props.deleteStudent}
           fetchCampus={this.props.fetchCampus}
           students={this.props.allStudents}
-          deleteCampus= {this.props.deleteCampus}
+          deleteCampus={this.props.deleteCampus}
+          allCampuses={this.props.allCampuses}
+          deletion={this.deletion}
         />
       </div>
     );
   }
 }
+
 
 // The following 2 input arguments are passed to the "connect" function used by "CampusContainer" component to connect to Redux Store.
 // 1. The "mapState" argument specifies the data from Redux Store that the component needs.
@@ -44,6 +66,7 @@ const mapState = (state) => {
   return {
     campus: state.campus,  // Get the State object from Reducer "campus"
     allStudents: state.allStudents,
+    allCampuses: state.allCampuses,  // Get the State object from Reducer "allCampuses"
   };
 };
 // 2. The "mapDispatch" argument is used to dispatch Action (Redux Thunk) to Redux Store.
@@ -51,6 +74,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     fetchCampus: (id) => dispatch(fetchCampusThunk(id)),
+    fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     deleteStudent: (studentId) => dispatch(deleteStudentThunk(studentId)),
     fetchAllStudents: () => dispatch(fetchAllStudentsThunk()),
     deleteCampus: (campusid) => dispatch(deleteCampusThunk(campusid)),
