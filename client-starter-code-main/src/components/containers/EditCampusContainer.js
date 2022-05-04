@@ -35,7 +35,7 @@ class EditCampusContainer extends Component {
             campusId: null,
             email: null,
             gpa: null,
-            redirect: false, 
+            redirect: false,
             redirectId: null
         });
     }
@@ -94,7 +94,7 @@ class EditCampusContainer extends Component {
     handleStudentSubmit = async event => {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
         if (this.state.firstname == null || this.state.lastname == null || this.state.email == null || this.state.gpa == null) {
-            alert("Only Campus ID can be empty.  Please fill out all the fields");
+            alert("One or more field(s) may be empty.  Please fill out all the fields");
             return;
         }
 
@@ -117,28 +117,6 @@ class EditCampusContainer extends Component {
             email: null,
             gpa: null,
         });
-        // event.preventDefault();  // Prevent browser reload/refresh after submit.
-        // let student = {
-        //     firstname: this.state.firstname,
-        //     lastname: this.state.lastname,
-        //     campusId: this.props.campus.id,
-        //     email: this.state.email,
-        //     gpa: this.state.gpa
-        // };
-
-        // // Add new student in back-end database
-        // let newStudent = await this.props.addStudent(student);
-
-        // // Update state, and trigger redirect to show the new student
-        // this.setState({
-        //     firstname: "",
-        //     lastname: "",
-        //     campusId: null,
-        //     redirect: false,
-        //     redirectId: null
-        // });
-        // this.props.fetchCampus(this.props.match.params.id);
-
     }
 
     handleSubmit = async event => {

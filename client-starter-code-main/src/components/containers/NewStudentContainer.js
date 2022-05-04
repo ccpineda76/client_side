@@ -74,8 +74,6 @@ class NewStudentContainer extends Component {
     event.preventDefault();  // Prevent browser reload/refresh after submit.
     if (this.state.campusId !== null) {
       for (let i = 0; i < this.props.allCampuses.length; i++) {
-        console.log(this.props.allCampuses[i].id)
-        console.log((this.state.campusId))
         if ((parseInt(this.state.campusId)) === this.props.allCampuses[i].id) {
           checker = true;
         }
@@ -86,7 +84,7 @@ class NewStudentContainer extends Component {
       }
     }
     else if (this.state.firstname == null || this.state.lastname == null || this.state.email == null || this.state.gpa == null) {
-      alert("One or more field(s) may be empty.  Please fill out all the fields");
+      alert("One or more field(s) may be empty.  Only Campus ID can be empty.  Please fill out all fields");
       return;
     }
 
