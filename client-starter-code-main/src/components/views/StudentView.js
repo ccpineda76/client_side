@@ -43,8 +43,6 @@ const StudentView = (props) => {
         <h1>{pupil}</h1>
         {allStudents.map((now_student) => {
           if (student.id === now_student.id) {
-            console.log(now_student);
-            console.log(student)
             return (
               <div className={classes.formContainer} >
                 <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
@@ -67,6 +65,9 @@ const StudentView = (props) => {
                 <br />
                 <br />
                 <button onClick={() => deletion(now_student.id)}>Delete Student</button>
+                <Link to={`/editstudent/${now_student.id}`}>
+                  <button>Edit Student</button>
+                </Link>
               </div>
             )
           }
@@ -95,6 +96,9 @@ const StudentView = (props) => {
                 <br />
                 <br />
                 <button onClick={() => deletion(now_student.id)}>Delete Student</button>
+                <Link to={`/editstudent/${now_student.id}`}>
+                  <button>Edit Student</button>
+                </Link>
               </div>
             )
           }

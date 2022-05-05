@@ -23,7 +23,6 @@ class StudentContainer extends Component {
     //getting student ID from url
     this.props.fetchAllStudents();
     this.props.fetchStudent(this.props.match.params.id);
-    console.log(this.props.student)
   }
 
   componentWillUnmount() {
