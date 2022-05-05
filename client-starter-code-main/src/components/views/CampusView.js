@@ -54,6 +54,7 @@ const CampusView = (props) => {
           if (now_campus.id === campus.id) {
             return (
               <div className={classes.formContainer}>
+                <h1 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '40px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>{now_campus.name}</h1>
                 <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
                 <p>{now_campus.address}</p>
                 <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
@@ -79,6 +80,7 @@ const CampusView = (props) => {
         if (now_campus.id === campus.id) {
           return (
             <div className={classes.formContainer}>
+              <h1 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '40px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>{now_campus.name}</h1>
               <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
               <p>{now_campus.address}</p>
               <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>

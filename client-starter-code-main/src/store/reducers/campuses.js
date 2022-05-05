@@ -15,8 +15,22 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
     case at.ADD_CAMPUS:
       return [...state, action.payload];
     case at.DELETE_CAMPUS:
+      // console.log(state)
+      // console.log(action.payload)
+      // state.map(campus =>
+      //   {
+      //     console.log(campus)
+      //   })
       return state.filter(campus => campus.id!==action.payload);
     case at.EDIT_CAMPUS:
+      // state.map(campus => {
+      //   if (campus.id === action.payload)
+      //   {
+      //     return(
+            
+      //     );
+      //   }
+      // })
       return state.map(campus => {
         return(
           campus.id === action.payload.id ? action.payload : campus

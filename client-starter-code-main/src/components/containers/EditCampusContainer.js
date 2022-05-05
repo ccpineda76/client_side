@@ -14,10 +14,11 @@ class EditCampusContainer extends Component {
             lastname: null,
             email: null,
             gpa: null,
-            name: "",
+            name: null,
+            id: null,
             campusId: null,
-            address: "",
-            description: "",
+            address: null,
+            description: null,
             redirect: false,
             redirectId: null,
             students: []
@@ -33,6 +34,7 @@ class EditCampusContainer extends Component {
             firstname: null,
             lastname: null,
             campusId: null,
+            id: null,
             email: null,
             gpa: null,
             redirect: false,
@@ -121,30 +123,44 @@ class EditCampusContainer extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
+        if (this.state.name === null && this.state.address === null && this.state.description === null) {
+            alert("You did not enter any changes above.  Please change at least one field or at most three.");
+            return;
+        }
         let campus = {
             name: this.state.name,
-            campusId: this.state.campusId,
+            id: this.props.campus.id,
             address: this.state.address,
-            description: this.state.description,
-            students: this.state.students
+            description: this.state.description
         };
+
+        if (this.state.name === null) {
+            campus.name = this.props.campus.name
+            console.log(campus)
+        }
+        if (this.state.address === null) {
+            campus.address = this.props.campus.address
+            console.log(campus)
+        }
+        if (this.state.description === null) {
+            campus.description = this.props.campus.description
+            console.log(campus)
+        }
+
         //UPDATING BACKEND WITH NEW CAMPUS 
-        let newCampus = await this.props.editCampus(campus);
+        let editCampus = await this.props.editCampus(campus);
 
         this.setState({
             name: "",
             campusId: null,
             address: "",
             description: "",
+            id: null,
             redirect: true,
-            redirectId: newCampus.id,
+            redirectId: this.props.campus.id,
             students: []
         });
     }
-
-    // componentWillUnmount() {
-    //     this.setState({ redirect: false, redirectId: null });
-    // }
 
     render() {
         // Redirect to new student's page after submit

@@ -19,9 +19,8 @@ class CampusContainer extends Component {
       university: null
     }
   }
-  // Get the specific campus data from back-end database
+
   componentDidMount() {
-    // Get campus ID from URL (API link)
     this.props.fetchAllCampuses();
     this.props.fetchAllStudents();
     this.props.fetchCampus(this.props.match.params.id);
@@ -35,8 +34,6 @@ class CampusContainer extends Component {
     this.props.deleteCampus(id);
     this.setState({ university: "Campus Successfully Deleted" });
   }
-
-
 
   // Render a Campus view by passing campus data as props to the corresponding View component
   render() {
