@@ -136,16 +136,18 @@ class EditCampusContainer extends Component {
 
         if (this.state.name === null) {
             campus.name = this.props.campus.name
-            console.log(campus)
+            // console.log(campus)
         }
         if (this.state.address === null) {
             campus.address = this.props.campus.address
-            console.log(campus)
+            // console.log(campus)
         }
         if (this.state.description === null) {
             campus.description = this.props.campus.description
-            console.log(campus)
+            // console.log(campus)
         }
+
+        alert("Your change has been successfully submitted!")
 
         //UPDATING BACKEND WITH NEW CAMPUS 
         let editCampus = await this.props.editCampus(campus);
@@ -163,7 +165,6 @@ class EditCampusContainer extends Component {
     }
 
     render() {
-        // Redirect to new student's page after submit
         if (this.state.redirect) {
             return (<Redirect to={`/campus/${this.state.redirectId}`} />)
         }
