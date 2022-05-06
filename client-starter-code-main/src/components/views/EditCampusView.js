@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EditCampusView = (props) => {
-    const { handleGPA, handleEmail, handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, campus, deleteStudent, fetchCampus } = props;
+    const { handleGPA, allCampuses, handleEmail, handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, campus, deleteStudent, fetchCampus } = props;
     const classes = useStyles()
     const currentcampus = [];
     for (let i = 0; i < students.length; i++) {
@@ -43,6 +43,14 @@ const EditCampusView = (props) => {
                 <br />
                 <br />
                 <br />
+                {/* {allCampuses.map((now_campus) => {
+                    if(now_campus.id == campus.id)
+                    {
+                        return(
+
+                        );
+                    }
+                })} */}
                 <div className={classes.root}>
                     <div className={classes.formContainer}>
                         <div className={classes.formTitle}>
