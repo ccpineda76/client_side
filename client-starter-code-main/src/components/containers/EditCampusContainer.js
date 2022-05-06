@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import EditCampusView from '../views/EditCampusView';
-import { fetchAllStudentsThunk, addCampusThunk, deleteCampusThunk, fetchCampusThunk, addStudentThunk, deleteStudentThunk, editCampusThunk } from '../../store/thunks';
+import { fetchAllStudentsThunk, addCampusThunk, deleteCampusThunk, fetchCampusThunk, addStudentThunk, deleteStudentThunk, editCampusThunk, fetchAllCampusesThunk } from '../../store/thunks';
 
 class EditCampusContainer extends Component {
     constructor(props) {
@@ -26,7 +26,9 @@ class EditCampusContainer extends Component {
     }
     componentDidMount() {
         //getting student ID from url
+        this.props.fetchAllCampuses();
         this.props.fetchCampus(this.props.match.params.id);
+
     }
 
     componentWillUnmount() {
@@ -165,9 +167,9 @@ class EditCampusContainer extends Component {
     }
 
     render() {
-        if (this.state.redirect) {
-            return (<Redirect to={`/campus/${this.state.redirectId}`} />)
-        }
+        // if (this.state.redirect) {
+        //     return (<Redirect to={`/campus/${this.state.redirectId}`} />)
+        // }
 
         // Display the input form via the corresponding View component
         return (
@@ -191,6 +193,7 @@ class EditCampusContainer extends Component {
                     editCampus={this.props.editCampus}
                     handleEmail={this.handleEmail}
                     handleGPA={this.handleGPA}
+                    allCampuses={this.props.allCampuses}
                 />
             </div>
         );
@@ -200,6 +203,7 @@ class EditCampusContainer extends Component {
 const mapState = (state) => {
     return {
         allStudents: state.allStudents,
+        allCampuses: state.allCampuses,
         campus: state.campus,  // Get the State object from Reducer "campus"
     };
 };
@@ -213,6 +217,7 @@ const mapDispatch = (dispatch) => {
         deleteStudent: (studentId) => dispatch(deleteStudentThunk(studentId)),
         editCampus: (campusid) => dispatch(editCampusThunk(campusid)),
         addStudent: (student) => dispatch(addStudentThunk(student)),
+        fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
     })
 }
 export default connect(mapState, mapDispatch)(EditCampusContainer);

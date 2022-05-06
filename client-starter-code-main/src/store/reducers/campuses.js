@@ -15,27 +15,17 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
     case at.ADD_CAMPUS:
       return [...state, action.payload];
     case at.DELETE_CAMPUS:
-      // console.log(state)
-      // console.log(action.payload)
-      // state.map(campus =>
-      //   {
-      //     console.log(campus)
-      //   })
-      return state.filter(campus => campus.id!==action.payload);
+      return state.filter(campus => campus.id !== action.payload);
     case at.EDIT_CAMPUS:
-      // state.map(campus => {
-      //   if (campus.id === action.payload)
-      //   {
-      //     return(
-            
-      //     );
+      // console.log(state);
+      // console.log(action.payload.data);
+      // for (let i = 0; i < state.length; i++) {
+      //   if (state[i].id === action.payload.data.id) {
+      //     state[i] = action.payload.data
       //   }
-      // })
-      return state.map(campus => {
-        return(
-          campus.id === action.payload.id ? action.payload : campus
-        );
-      });
+      // }
+      // console.log(state)
+      return state;
     default:
       // If the Reducer doesn't recognize the Action Type, returns the previous (current) State unchanged.
       return state;
