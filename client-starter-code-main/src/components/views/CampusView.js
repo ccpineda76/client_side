@@ -35,7 +35,7 @@ const useStyles = makeStyles(() => ({
 
 // Take in props data to construct the component
 const CampusView = (props) => {
-  const { campus, deleteStudent, students, allCampuses, deletion, university } = props;
+  const { campus, deleteStudent, unEnroll, students, allCampuses, deletion, university } = props;
   const classes = useStyles();
   const currentcampus = [];
 
@@ -89,12 +89,13 @@ const CampusView = (props) => {
               {students.map((student) => {
                 if (student.campusId === now_campus.id) {
                   let name = student.firstname + " " + student.lastname;
+                  console.log(student.campusId)
                   return (
                     <div key={student.id}>
                       <Link to={`/student/${student.id}`}>
                         <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
                       </Link>
-                      <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
+                      <button onClick={() => unEnroll(now_campus.id)}>Delete Student</button>
                       <br />
                       <br />
                     </div>

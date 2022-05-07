@@ -17,15 +17,13 @@ const allCampuses = (state = [], action) => {  // Empty array as default Initial
     case at.DELETE_CAMPUS:
       return state.filter(campus => campus.id !== action.payload);
     case at.EDIT_CAMPUS:
-      // console.log(state);
-      // console.log(action.payload.data);
-      // for (let i = 0; i < state.length; i++) {
-      //   if (state[i].id === action.payload.data.id) {
-      //     state[i] = action.payload.data
-      //   }
-      // }
-      // console.log(state)
-      return state;
+      let new_State = [...state];
+      for (let i = 0; i < new_State.length; i++) {
+        if (new_State[i].id === action.payload.data.id) {
+          new_State[i] = action.payload.data
+        }
+      }
+      return [...new_State];
     default:
       // If the Reducer doesn't recognize the Action Type, returns the previous (current) State unchanged.
       return state;
