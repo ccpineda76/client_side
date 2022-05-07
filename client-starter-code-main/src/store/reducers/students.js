@@ -13,18 +13,19 @@ const allStudents = (state = [], action) => {  // Empty array as default Initial
     case at.FETCH_ALL_STUDENTS:
       return action.payload;
     case at.ADD_STUDENT:
+      console.log(state);
+      console.log(action)
       return [...state, action.payload]
     case at.DELETE_STUDENT:
       return state.filter(student => student.id !== action.payload);
     case at.EDIT_STUDENT:
-      console.log(state)
-      console.log(action)
-      for (let i = 0; i < state.length; i++) {
-        if (state[i].id === action.payload.data.id) {
-          state[i] = action.payload.data
-        }
-      }
-      return state;
+      // return state.map
+      // console.log(state[0])
+      // console.log(action.payload.data)
+      // state[0] = "String";
+      // console.log(state[0]);
+      // console.log(state);
+      // return state[1] = "action.payload.data";
     default:
       // If the Reducer doesn't recognize the Action Type, returns the previous (current) State unchanged.
       return state;

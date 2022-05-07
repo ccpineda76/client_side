@@ -43,14 +43,6 @@ const EditCampusView = (props) => {
                 <br />
                 <br />
                 <br />
-                {/* {allCampuses.map((now_campus) => {
-                    if(now_campus.id == campus.id)
-                    {
-                        return(
-
-                        );
-                    }
-                })} */}
                 <div className={classes.root}>
                     <div className={classes.formContainer}>
                         <div className={classes.formTitle}>
