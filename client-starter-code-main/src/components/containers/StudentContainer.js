@@ -26,7 +26,9 @@ class StudentContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.setState({ pupil: null });
+    this.setState({
+      pupil: null
+    });
   }
 
   deletion = (id) => {

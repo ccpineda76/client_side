@@ -42,9 +42,7 @@ class CampusContainer extends Component {
       id: student_id,
       campusId: null
     }
-
     let editStudent = this.props.editStudent(editStudentID);
-
   }
 
   // Render a Campus view by passing campus data as props to the corresponding View component

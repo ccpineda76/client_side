@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EditCampusView = (props) => {
-    const { handleGPA, allCampuses, handleEmail, handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, campus, deleteStudent, fetchCampus } = props;
+    const { handleGPA, allCampuses, handleEmail, unEnroll, handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, campus, deleteStudent, fetchCampus } = props;
     const classes = useStyles()
     const currentcampus = [];
     for (let i = 0; i < students.length; i++) {
@@ -221,7 +221,7 @@ const EditCampusView = (props) => {
                                         <Link to={`/student/${student.id}`}>
                                             <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
                                         </Link>
-                                        <button onClick={() => deleteStudent(student.id)}>Delete Student</button>
+                                        <button onClick={() => unEnroll(student.id)}>Remove From Campus</button>
                                         <br />
                                         <br />
                                     </div>

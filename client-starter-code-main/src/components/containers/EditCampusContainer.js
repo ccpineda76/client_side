@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import EditCampusView from '../views/EditCampusView';
-import { fetchAllStudentsThunk, addCampusThunk, deleteCampusThunk, fetchCampusThunk, addStudentThunk, deleteStudentThunk, editCampusThunk, fetchAllCampusesThunk } from '../../store/thunks';
+import { editStudentThunk, fetchAllStudentsThunk, addCampusThunk, deleteCampusThunk, fetchCampusThunk, addStudentThunk, deleteStudentThunk, editCampusThunk, fetchAllCampusesThunk } from '../../store/thunks';
 
 class EditCampusContainer extends Component {
     constructor(props) {
@@ -94,11 +94,20 @@ class EditCampusContainer extends Component {
         });
     }
 
+    unEnroll = (student_id) => {
+        let editStudentID =
+        {
+          id: student_id,
+          campusId: null
+        }
+        let editStudent = this.props.editStudent(editStudentID);
+      }
+
     // Take action after user click the submit button
     handleStudentSubmit = async event => {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
-        if (this.state.firstname == null || this.state.lastname == null || this.state.email == null || this.state.gpa == null) {
-            alert("One or more field(s) may be empty.  Please fill out all the fields");
+        if (this.state.firstname == null || this.state.lastname == null) {
+            alert("First name or last name may be empty, please fill out both.");
             return;
         }
 
@@ -153,7 +162,6 @@ class EditCampusContainer extends Component {
 
         //UPDATING BACKEND WITH NEW CAMPUS 
         let editCampus = await this.props.editCampus(campus);
-
         this.setState({
             name: "",
             campusId: null,
@@ -167,15 +175,11 @@ class EditCampusContainer extends Component {
     }
 
     render() {
-        // if (this.state.redirect) {
-        //     return (<Redirect to={`/campus/${this.state.redirectId}`} />)
-        // }
-
-        // Display the input form via the corresponding View component
         return (
             <div>
                 <Header />
                 <EditCampusView
+                    unEnroll={this.unEnroll}
                     handleChange={this.handleChange}
                     handleCampus={this.handleCampus}
                     handleAddress={this.handleAddress}
@@ -218,6 +222,7 @@ const mapDispatch = (dispatch) => {
         editCampus: (campusid) => dispatch(editCampusThunk(campusid)),
         addStudent: (student) => dispatch(addStudentThunk(student)),
         fetchAllCampuses: () => dispatch(fetchAllCampusesThunk()),
+        editStudent: (campusid) => dispatch(editStudentThunk(campusid)),
     })
 }
 export default connect(mapState, mapDispatch)(EditCampusContainer);
