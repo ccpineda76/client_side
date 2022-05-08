@@ -83,11 +83,14 @@ class NewStudentContainer extends Component {
         return;
       }
     }
-    else if (this.state.firstname == null || this.state.lastname == null || this.state.email == null || this.state.gpa == null) {
-      alert("One or more field(s) may be empty.  Only Campus ID can be empty.  Please fill out all fields");
+    if (this.state.firstname == null || this.state.lastname == null) {
+      alert("First and Last name cannot both be empty.  Please fill out those following fields.");
       return;
     }
+    // if(this.state.email == null || this.state.gpa == null)
+    // {
 
+    // }
     let student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,

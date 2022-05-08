@@ -18,7 +18,10 @@ class EditStudentContainer extends Component {
             campusId: null,
             id: null,
             redirect: false,
-            redirectId: null
+            redirectId: null,
+            //These variables are for temporary email and grade
+            temp_email: this.props.student.email,
+            temp_gpa: this.props.student.gpa
         }
     }
     componentDidMount() {
@@ -34,10 +37,23 @@ class EditStudentContainer extends Component {
             campusId: null,
             id: null,
             redirect: false,
-            redirectId: null
+            redirectId: null,
+            temp_email: null,
+            temp_gpa: null
         });
     }
 
+    empty_message_email = () => {
+        this.setState({
+            temp_email: "There is no email available"
+        })
+    }
+
+    empty_message_gpa = () => {
+        this.setState({
+            gpa: "There is no GPA aviailable"
+        })
+    }
 
 
     handleFirstName = event => {
@@ -76,35 +92,36 @@ class EditStudentContainer extends Component {
             alert("All fields are empty, please fill at least one field");
             return;
         }
-        let student =
+        let new_student =
         {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             email: this.state.email,
             gpa: this.state.gpa,
-            campusId: this.state.campusId,
+            campusId: parseInt(this.state.campusId),
             id: this.props.student.id
         }
         if (this.state.firstname === null) {
-            student.firstname = this.props.student.firstname
+            new_student.firstname = this.props.student.firstname
         }
         if (this.state.lastname === null) {
-            student.lastname = this.props.student.lastname
+            new_student.lastname = this.props.student.lastname
         }
         if (this.state.email === null) {
-            student.email = this.props.student.email
+            new_student.email = this.props.student.email
         }
         if (this.state.gpa === null) {
-            student.gpa = this.props.student.gpa
+            new_student.gpa = this.props.student.gpa
         }
         if (this.state.campusId === null) {
-            student.campusId = this.props.student.campusId
+            new_student.campusId = parseInt(this.props.student.campusId)
         }
-
         alert("Your change has been successfully submitted!")
 
-        let editStudent = await this.props.editStudent(student);
-
+        let editStudent = await this.props.editStudent(new_student);
+        console.log(this.state.campusId)
+        console.log(new_student.campusId)
+        console.log(this.props.student)
         this.setState({
             firstname: null,
             lastname: null,
@@ -118,10 +135,6 @@ class EditStudentContainer extends Component {
     }
 
     render() {
-        // if (this.state.redirect) {
-        //     return (<Redirect to={`/student/${this.state.redirectId}`} />)
-        // }
-
         return (
             <div>
                 <Header />
@@ -134,6 +147,8 @@ class EditStudentContainer extends Component {
                     handleLastName={this.handleLastName}
                     handleStudentSubmit={this.handleStudentSubmit}
                     handleCampusID={this.handleCampusID}
+                    empty_message_email={this.empty_message_email}
+                    empty_message_gpa={this.empty_message_gpa}
                 />
             </div>
         );

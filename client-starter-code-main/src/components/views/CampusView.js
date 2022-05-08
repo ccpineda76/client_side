@@ -95,8 +95,6 @@ const CampusView = (props) => {
                       <Link to={`/student/${student.id}`}>
                         <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
                       </Link>
-                      <button onClick={() => unEnroll(now_campus.id)}>Delete Student</button>
-                      <br />
                       <br />
                     </div>
                   );
