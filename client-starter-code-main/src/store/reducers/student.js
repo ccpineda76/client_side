@@ -18,7 +18,6 @@ const student = (state = initialState, action) => {  // Use "initialState" as de
     case FETCH_STUDENT:
       return action.payload;
     case EDIT_STUDENT:
-
       let campus_holder = null;
       for (let i = 0; i < action.campuses.data.length; i++) {
         if (action.campuses.data[i].id === action.payload.data.campusId) {

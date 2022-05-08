@@ -24,7 +24,6 @@ const allStudents = (state = [], action) => {  // Empty array as default Initial
           campus_holder = action.campuses.data[i]
         }
       }
-
       for (let i = 0; i < state.length; i++) {
         new_State.push(state[i]);
       }

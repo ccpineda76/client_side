@@ -36,8 +36,8 @@ const useStyles = makeStyles(() => ({
 const StudentView = (props) => {
   const { student, pupil, deletion, allStudents} = props;
   const classes = useStyles();
-  let mailEval = "Student email unavailable";
-  let gradeEval = "Student grade unavailable";
+  let mailEval = "Student email was never provided";
+  let gradeEval = "Student GPA was never provided";
 
 
   if(student.gpa !== null)

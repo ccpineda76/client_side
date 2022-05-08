@@ -122,6 +122,11 @@ class EditCampusContainer extends Component {
         // Add new student in back-end database
         let newStudent = await this.props.addStudent(student);
 
+        let form = document.getElementById('student-form');
+        form.reset();
+
+        alert("Student has been added!")
+        
         // Update state, and trigger redirect to show the new student
         this.setState({
             firstname: null,
@@ -147,21 +152,22 @@ class EditCampusContainer extends Component {
 
         if (this.state.name === null) {
             campus.name = this.props.campus.name
-            // console.log(campus)
         }
         if (this.state.address === null) {
             campus.address = this.props.campus.address
-            // console.log(campus)
         }
         if (this.state.description === null) {
             campus.description = this.props.campus.description
-            // console.log(campus)
         }
 
         alert("Your change has been successfully submitted!")
 
         //UPDATING BACKEND WITH NEW CAMPUS 
         let editCampus = await this.props.editCampus(campus);
+
+        let form = document.getElementById('student-form');
+        form.reset();
+        
         this.setState({
             name: "",
             campusId: null,
