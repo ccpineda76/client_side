@@ -117,11 +117,9 @@ class EditStudentContainer extends Component {
             new_student.campusId = parseInt(this.props.student.campusId)
         }
         alert("Your change has been successfully submitted!")
-
+        let form = document.getElementById('student-form');
+        form.reset();
         let editStudent = await this.props.editStudent(new_student);
-        console.log(this.state.campusId)
-        console.log(new_student.campusId)
-        console.log(this.props.student)
         this.setState({
             firstname: null,
             lastname: null,

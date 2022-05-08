@@ -107,7 +107,7 @@ export const editCampusThunk = campus => async dispatch => {  // The THUNK
     // let updatedCampus = await axios.put(`/api/campuses/1`, campus);
     // Update successful so change state with dispatch
     dispatch(ac.editCampus(updatedCampus));
-    dispatch(ac.editCampus(updatedCampus));
+    // dispatch(ac.editCampus(updatedCampus));
   } catch (err) {
     console.error(err);
   }

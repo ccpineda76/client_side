@@ -87,10 +87,7 @@ class NewStudentContainer extends Component {
       alert("First and Last name cannot both be empty.  Please fill out those following fields.");
       return;
     }
-    // if(this.state.email == null || this.state.gpa == null)
-    // {
 
-    // }
     let student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -113,11 +110,6 @@ class NewStudentContainer extends Component {
       redirectId: newStudent.id
     });
   }
-
-  // Unmount when the component is being removed from the DOM:
-  // componentWillUnmount() {
-  //   this.setState({ redirect: false, redirectId: null });
-  // }
 
   // Render new student input form
   render() {

@@ -31,6 +31,17 @@ const useStyles = makeStyles(() => ({
 const EditStudentView = (props) => {
     const { student, allStudents, handleEmail, handleGPA, handleFirstName, handleLastName, handleStudentSubmit, handleCampusID } = props
     const classes = useStyles();
+    let temp_email = student.email;
+    let temp_gpa = student.gpa;
+    if(temp_email === null)
+    {
+        temp_email = "Student Email was never provided";
+    }
+    if(temp_gpa === null)
+    {
+        temp_gpa = "Student GPA was never provided";
+    }
+
     if (student.campus == null) {
         return (
             <div>
@@ -45,10 +56,10 @@ const EditStudentView = (props) => {
                                 <div>This student is not enrolled in a campus</div>
                                 <br />
                                 <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Student Email: </div>
-                                <div>{now_student.email}</div>
+                                <div>{temp_email}</div>
                                 <br />
                                 <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Grade Point Average: </div>
-                                <div>{now_student.gpa}</div>
+                                <div>{temp_gpa}</div>
                                 <br />
                                 <br />
                             </div>
@@ -63,7 +74,7 @@ const EditStudentView = (props) => {
                                 Add a Student
                             </Typography>
                         </div>
-                        <form style={{ textAlign: 'center' }} onSubmit={(e) => handleStudentSubmit(e)}>
+                        <form id = 'student-form' style={{ textAlign: 'center' }} onSubmit={(e) => handleStudentSubmit(e)}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleFirstName(e)} />
                             <br />
@@ -85,7 +96,7 @@ const EditStudentView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-                            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
+                            <input type="number" step = ".01" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 
@@ -120,10 +131,10 @@ const EditStudentView = (props) => {
                                 <div>{student.campus.name}</div>
                                 <br />
                                 <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Student Email: </div>
-                                <div>{now_student.email}</div>
+                                <div>{temp_email}</div>
                                 <br />
                                 <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Grade Point Average: </div>
-                                <div>{now_student.gpa}</div>
+                                <div>{temp_gpa}</div>
                                 <br />
                                 <br />
                             </div>
@@ -138,7 +149,7 @@ const EditStudentView = (props) => {
                                 Add a Student
                             </Typography>
                         </div>
-                        <form style={{ textAlign: 'center' }} onSubmit={(e) => handleStudentSubmit(e)}>
+                        <form id = 'student-form' style={{ textAlign: 'center' }} onSubmit={(e) => handleStudentSubmit(e)}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleFirstName(e)} />
                             <br />
@@ -160,7 +171,7 @@ const EditStudentView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-                            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
+                            <input type="number" step = ".01" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 

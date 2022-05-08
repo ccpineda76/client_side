@@ -72,7 +72,7 @@ const NewStudentView = (props) => {
             <br />
 
             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
+            <input type="number" step = ".01" name="campusId" onChange={(e) => handleGPA(e)} />
             <br />
             <br />
 
