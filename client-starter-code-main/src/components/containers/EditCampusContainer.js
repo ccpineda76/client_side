@@ -159,13 +159,13 @@ class EditCampusContainer extends Component {
             description: this.state.description
         };
 
-        if (this.state.name === null || this.state.name === "") {
+        if (this.state.name === null || this.state.name === "" || !this.state.name.replace(/\s/g, '').length) {
             campus.name = this.props.campus.name
         }
-        if (this.state.address === null || this.state.address === "") {
+        if (this.state.address === null || this.state.address === "" || !this.state.address.replace(/\s/g, '').length) {
             campus.address = this.props.campus.address
         }
-        if (this.state.description === null || this.state.description === "") {
+        if (this.state.description === null || this.state.description === "" || !this.state.description.replace(/\s/g, '').length) {
             campus.description = this.props.campus.description
         }
 
