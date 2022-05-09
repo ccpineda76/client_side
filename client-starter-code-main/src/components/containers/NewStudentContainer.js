@@ -96,7 +96,7 @@ class NewStudentContainer extends Component {
       gpa: this.state.gpa,
     };
 
-    if(student.campusId === "" || !student.campusId.replace(/\s/g, '').length === 0)
+    if(student.campusId === "" || !student.campusId.replace(/\s/g, '').length)
     {
       student.campusId = null;
     }
