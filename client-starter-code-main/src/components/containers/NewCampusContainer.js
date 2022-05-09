@@ -51,8 +51,8 @@ class NewCampusContainer extends Component {
 
     handleSubmit = async event => {
         event.preventDefault();
-        if (this.state.name == null || this.state.address == null || this.state.description == null) {
-            alert("You left a field empty.  Please fill out all fields")
+        if (this.state.name == null || this.state.address == null || this.state.name == "" || this.state.address == "" || !this.state.name.replace(/\s/g, '').length || !this.state.address.replace(/\s/g, '').length) {
+            alert("You left the campus name or address field empty.  Please fill out all fields")
         }
         else {
             let campus = {
@@ -61,6 +61,10 @@ class NewCampusContainer extends Component {
                 description: this.state.description,
                 students: this.state.students
             };
+            if(campus.description === null || campus.description === "" || !campus.description.replace(/\s/g, '').length)
+            {
+                campus.description = "Campus description was not provided";
+            }
             //UPDATING BACKEND WITH NEW CAMPUS 
             let newCampus = await this.props.addCampus(campus);
 

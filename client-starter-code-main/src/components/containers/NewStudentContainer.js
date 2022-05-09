@@ -78,16 +78,16 @@ class NewStudentContainer extends Component {
           checker = true;
         }
       }
-      if (checker === false) {
+      if (checker === false && this.state.campusId !== "") {
         alert("This campus is not in our database, please enter an ID with an existing campus.");
         return;
       }
     }
-    if (this.state.firstname == null || this.state.lastname == null) {
+    if (this.state.firstname == null || this.state.lastname == null || this.state.firstname == "" || this.state.lastname == "" || !this.state.firstname.replace(/\s/g, '').length || !this.state.lastname.replace(/\s/g, '').length) {
       alert("First and Last name cannot both be empty.  Please fill out those following fields.");
       return;
     }
-
+    
     let student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -95,6 +95,21 @@ class NewStudentContainer extends Component {
       email: this.state.email,
       gpa: this.state.gpa,
     };
+
+    if(student.campusId === "" || !student.campusId.replace(/\s/g, '').length === 0)
+    {
+      student.campusId = null;
+    }
+    if(student.email === "" || !student.email.replace(/\s/g, '').length)
+    {
+      student.email = null;
+    }
+    
+    if(student.gpa === "" || !student.gpa.replace(/\s/g, '').length)
+    {
+      student.gpa = null;
+    }
+    
 
     // Add new student in back-end database
     let newStudent = await this.props.addStudent(student);
