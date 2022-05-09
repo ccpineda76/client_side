@@ -97,17 +97,17 @@ class EditCampusContainer extends Component {
     unEnroll = (student_id) => {
         let editStudentID =
         {
-          id: student_id,
-          campusId: null
+            id: student_id,
+            campusId: null
         }
         let editStudent = this.props.editStudent(editStudentID);
-      }
+    }
 
     // Take action after user click the submit button
     handleStudentSubmit = async event => {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
-        if (this.state.firstname == null || this.state.lastname == null) {
-            alert("First name or last name may be empty, please fill out both.");
+        if (this.state.firstname == null || this.state.lastname == null || this.state.firstname == "" || this.state.lastname == "" || !this.state.firstname.replace(/\s/g, '').length || !this.state.lastname.replace(/\s/g, '').length) {
+            alert("First and Last name cannot both be empty.  Please fill out those following fields.");
             return;
         }
 
@@ -119,6 +119,15 @@ class EditCampusContainer extends Component {
             gpa: this.state.gpa,
         };
 
+
+        if (student.email === "" || !student.email.replace(/\s/g, '').length) {
+            student.email = null;
+        }
+
+        if (student.gpa === "" || !student.gpa.replace(/\s/g, '').length) {
+            student.gpa = null;
+        }
+
         // Add new student in back-end database
         let newStudent = await this.props.addStudent(student);
 
@@ -126,7 +135,7 @@ class EditCampusContainer extends Component {
         form.reset();
 
         alert("Student has been added!")
-        
+
         // Update state, and trigger redirect to show the new student
         this.setState({
             firstname: null,
@@ -150,13 +159,13 @@ class EditCampusContainer extends Component {
             description: this.state.description
         };
 
-        if (this.state.name === null) {
+        if (this.state.name === null || this.state.name === "") {
             campus.name = this.props.campus.name
         }
-        if (this.state.address === null) {
+        if (this.state.address === null || this.state.address === "") {
             campus.address = this.props.campus.address
         }
-        if (this.state.description === null) {
+        if (this.state.description === null || this.state.description === "") {
             campus.description = this.props.campus.description
         }
 
@@ -167,7 +176,7 @@ class EditCampusContainer extends Component {
 
         let form = document.getElementById('student-form');
         form.reset();
-        
+
         this.setState({
             name: "",
             campusId: null,
