@@ -121,7 +121,7 @@ const EditCampusView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-                            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
+                            <input type="number" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 
@@ -256,7 +256,7 @@ const EditCampusView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-                            <input type="text" name="campusId" onChange={(e) => handleGPA(e)} />
+                            <input type="number" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 
