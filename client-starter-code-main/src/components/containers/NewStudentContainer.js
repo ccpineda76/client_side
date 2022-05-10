@@ -87,7 +87,7 @@ class NewStudentContainer extends Component {
       alert("First and Last name cannot both be empty.  Please fill out those following fields.");
       return;
     }
-    
+
     let student = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
@@ -96,20 +96,21 @@ class NewStudentContainer extends Component {
       gpa: this.state.gpa,
     };
 
-    if(student.campusId === "" || !student.campusId.replace(/\s/g, '').length)
-    {
+    if (student.campusId === "") {
       student.campusId = null;
     }
-    if(student.email === "" || !student.email.replace(/\s/g, '').length)
-    {
-      student.email = null;
+
+    console.log(student.email)
+
+    if (student.email !== null) {
+      if (!student.email.replace(/\s/g, '').length) {
+        student.email = null;
+      }
     }
-    
-    if(student.gpa === "" || !student.gpa.replace(/\s/g, '').length)
-    {
+    if (student.gpa === "") {
       student.gpa = null;
     }
-    
+
 
     // Add new student in back-end database
     let newStudent = await this.props.addStudent(student);

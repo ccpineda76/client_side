@@ -119,12 +119,13 @@ class EditCampusContainer extends Component {
             gpa: this.state.gpa,
         };
 
-
-        if (student.email === "" || !student.email.replace(/\s/g, '').length) {
-            student.email = null;
+        if (student.email !== null) {
+            if (!student.email.replace(/\s/g, '').length) {
+                student.email = null;
+            }
         }
 
-        if (student.gpa === "" || !student.gpa.replace(/\s/g, '').length) {
+        if (student.gpa === "") {
             student.gpa = null;
         }
 

@@ -93,7 +93,7 @@ class EditStudentContainer extends Component {
             alert("All fields are empty, please fill at least one field");
             return;
         }
-        if (this.state.campusId !== null) {
+        if (this.state.campusId !== null && this.state.campusId !== "") {
             for (let i = 0; i < this.props.allCampuses.length; i++) {
                 if ((parseInt(this.state.campusId)) === this.props.allCampuses[i].id) {
                     checker = true;
@@ -113,6 +113,7 @@ class EditStudentContainer extends Component {
             campusId: parseInt(this.state.campusId),
             id: this.props.student.id
         }
+
         if (this.state.firstname === null || this.state.firstname === "" || !this.state.firstname.replace(/\s/g, '').length) {
             new_student.firstname = this.props.student.firstname
         }
@@ -122,10 +123,10 @@ class EditStudentContainer extends Component {
         if (this.state.email === null || this.state.email === "" || !this.state.email.replace(/\s/g, '').length) {
             new_student.email = this.props.student.email
         }
-        if (this.state.gpa === null || this.state.gpa === "" || !this.state.gpa.replace(/\s/g, '').length) {
+        if (this.state.gpa === null || this.state.gpa === "") {
             new_student.gpa = this.props.student.gpa
         }
-        if (this.state.campusId === null || this.state.campusId === "" || !this.state.campusId.replace(/\s/g, '').length) {
+        if (this.state.campusId === null || this.state.campusId === "") {
             new_student.campusId = parseInt(this.props.student.campusId)
         }
 
