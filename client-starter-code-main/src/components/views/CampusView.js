@@ -55,6 +55,7 @@ const CampusView = (props) => {
             return (
               <div className={classes.formContainer}>
                 <h1 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '40px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>{now_campus.name}</h1>
+                <img src = {now_campus.imageLink} width = "400" height = '300'></img>
                 <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
                 <p>{now_campus.address}</p>
                 <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
@@ -81,6 +82,7 @@ const CampusView = (props) => {
           return (
             <div className={classes.formContainer}>
               <h1 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '40px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>{now_campus.name}</h1>
+              <img src = {now_campus.imageLink} width = "400" height = '300'></img>
               <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
               <p>{now_campus.address}</p>
               <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
@@ -89,12 +91,12 @@ const CampusView = (props) => {
               {students.map((student) => {
                 if (student.campusId === now_campus.id) {
                   let name = student.firstname + " " + student.lastname;
-                  console.log(student.campusId)
                   return (
                     <div key={student.id}>
                       <Link to={`/student/${student.id}`}>
                         <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
                       </Link>
+                      
                       <br />
                     </div>
                   );

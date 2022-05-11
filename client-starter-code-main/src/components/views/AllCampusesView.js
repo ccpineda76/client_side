@@ -64,6 +64,7 @@ const AllCampusesView = (props) => {
             <Link to={`/campus/${campus.id}`}>
               <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center'}}>{campus.name}</h2>
             </Link>
+            <img src = {campus.imageLink} width = "400" height = '300'></img>
             <Typography className={classes.title} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' , textDecoration: 'underline' }}>Campus ID</Typography>
             <h3>{campus.id}</h3>
             <Typography className={classes.title} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline'  }}>Address</Typography>

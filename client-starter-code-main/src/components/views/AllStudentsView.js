@@ -54,14 +54,12 @@ const AllStudentsView = (props) => {
       <div className={classes.formContainer}>
         {students.map((student) => {
           let name = student.firstname + " " + student.lastname;
-          // let campusname  = student.campus.name;
-          // console.log(campusname);
           return (
             <div key={student.id}>
               <Link to={`/student/${student.id}`}>
                 <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
               </Link>
-              {/* <Typography className={classes.title} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Enrolled at {campusname}</Typography> */}
+              <img src={student.imageLink} width="400" height='300'></img>
               <br />
               <button onClick={() => deleteStudent(student.id)}>Delete</button>
               <br />

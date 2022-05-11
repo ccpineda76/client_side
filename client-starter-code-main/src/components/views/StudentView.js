@@ -60,6 +60,7 @@ const StudentView = (props) => {
               <div className={classes.formContainer} >
                 <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
                 <p>{now_student.firstname + " " + now_student.lastname}</p>
+                <img src={student.imageLink} width="400" height='300'></img>
                 <div className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}> Campus: </div>
                 <div>This student is not enrolled in a campus</div>
                 <br />
@@ -91,6 +92,7 @@ const StudentView = (props) => {
               <div className={classes.formContainer} >
                 <h2 className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>Student Name: </h2>
                 <p>{now_student.firstname + " " + now_student.lastname}</p>
+                <img src={student.imageLink} width="400" height='300'></img>
                 <Typography className={classes.formTitle} style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>
                   This Student is enrolled at:
                 </Typography>
