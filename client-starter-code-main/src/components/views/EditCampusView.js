@@ -32,11 +32,13 @@ const EditCampusView = (props) => {
     const { handleGPA, allCampuses, handleEmail, unEnroll, handleSubmit, students, handleStudentSubmit, handleLastName, handleFirstName, handleCampus, handleAddress, handleDescription, campus, deleteStudent, fetchCampus } = props;
     const classes = useStyles()
     const currentcampus = [];
+
     for (let i = 0; i < students.length; i++) {
         if (students[i].campusId === campus.id) {
             currentcampus.push(students[i])
         }
     }
+
     if (currentcampus.length === 0) {
         return (
             <div>
@@ -50,6 +52,7 @@ const EditCampusView = (props) => {
                                 Editing Campus: {campus.name}
                             </Typography>
                         </div>
+                        <img src={campus.imageLink} width="400" height='300'></img>
                         <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
                         <p>{campus.address}</p>
                         <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
@@ -69,7 +72,7 @@ const EditCampusView = (props) => {
                                 Form for Editing Campus: {campus.name}
                             </Typography>
                         </div>
-                        <form id = 'student-form' style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
+                        <form id='student-form' style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleCampus(e)} />
                             <br />
@@ -100,7 +103,7 @@ const EditCampusView = (props) => {
                             </Typography>
                         </div>
                         {/* A place if user wants to add a student  */}
-                        <form id = 'student-form' style={{ textAlign: 'center' }} onSubmit={(e) => { handleStudentSubmit(e); fetchCampus(campus.id) }}>
+                        <form id='student-form' style={{ textAlign: 'center' }} onSubmit={(e) => { handleStudentSubmit(e); fetchCampus(campus.id) }}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleFirstName(e)} />
                             <br />
@@ -121,7 +124,7 @@ const EditCampusView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-                            <input type="number" name="campusId" onChange={(e) => handleGPA(e)} />
+                            <input type="number" step=".01" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 
@@ -149,6 +152,7 @@ const EditCampusView = (props) => {
                                 Editing Campus: {campus.name}
                             </Typography>
                         </div>
+                        <img src={campus.imageLink} width="400" height='300'></img>
                         <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Address</Typography>
                         <p>{campus.address}</p>
                         <Typography style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center', textDecoration: 'underline' }}>Description</Typography>
@@ -180,7 +184,7 @@ const EditCampusView = (props) => {
                                 Form for Editing Campus: {campus.name}
                             </Typography>
                         </div>
-                        <form id = 'student-form' style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
+                        <form id='student-form' style={{ textAlign: 'center' }} onSubmit={(e) => handleSubmit(e)}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>Campus Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleCampus(e)} />
                             <br />
@@ -221,6 +225,7 @@ const EditCampusView = (props) => {
                                         <Link to={`/student/${student.id}`}>
                                             <h2 style={{ fontWeight: 'bold', fontFamily: 'Courier, sans-serif', fontSize: '20px', color: '#11153e', textAlign: 'center' }}>{name}</h2>
                                         </Link>
+                                        <img src={student.imageLink} width="400" height='300'></img>
                                         <button onClick={() => unEnroll(student.id)}>Remove From Campus</button>
                                         <br />
                                         <br />
@@ -235,7 +240,7 @@ const EditCampusView = (props) => {
                             </Typography>
                         </div>
                         {/* A place if user wants to add a student  */}
-                        <form id = 'student-form' style={{ textAlign: 'center' }} onSubmit={(e) => { handleStudentSubmit(e); fetchCampus(campus.id) }}>
+                        <form id='student-form' style={{ textAlign: 'center' }} onSubmit={(e) => { handleStudentSubmit(e); fetchCampus(campus.id) }}>
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>First Name: </label>
                             <input type="text" name="firstname" onChange={(e) => handleFirstName(e)} />
                             <br />
@@ -256,7 +261,7 @@ const EditCampusView = (props) => {
                             <br />
 
                             <label style={{ color: '#11153e', fontWeight: 'bold' }}>GPA: </label>
-                            <input type="number" name="campusId" onChange={(e) => handleGPA(e)} />
+                            <input type="number" step=".01" name="campusId" onChange={(e) => handleGPA(e)} />
                             <br />
                             <br />
 

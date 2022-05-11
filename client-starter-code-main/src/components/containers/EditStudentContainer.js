@@ -26,6 +26,7 @@ class EditStudentContainer extends Component {
     }
     componentDidMount() {
         this.props.fetchAllStudents();
+        this.props.fetchAllCampuses();
         this.props.fetchStudent(this.props.match.params.id);
     }
     componentWillUnmount() {
@@ -93,13 +94,20 @@ class EditStudentContainer extends Component {
             alert("All fields are empty, please fill at least one field");
             return;
         }
-        if (this.state.campusId !== null && this.state.campusId !== "") {
+        if (this.state.gpa > 4 || this.state.gpa < 0) {
+            alert("Student GPA cannot be less than 0 or greater than 4");
+            return;
+        }
+        if (this.state.campusId !== null) {
             for (let i = 0; i < this.props.allCampuses.length; i++) {
                 if ((parseInt(this.state.campusId)) === this.props.allCampuses[i].id) {
                     checker = true;
                 }
             }
-            if (checker === false) {
+            if (this.state.campusId === "") {
+                checker = true;
+            }
+            else if (checker === false) {
                 alert("This campus is not in our database, please enter an ID with an existing campus.");
                 return;
             }

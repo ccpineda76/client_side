@@ -111,6 +111,11 @@ class NewStudentContainer extends Component {
       student.gpa = null;
     }
 
+    if(this.state.gpa > 4 || this.state.gpa < 0)
+    {
+      alert("Student GPA cannot be less than 0 or greater than 4");
+      return;
+    }
 
     // Add new student in back-end database
     let newStudent = await this.props.addStudent(student);

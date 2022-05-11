@@ -27,6 +27,7 @@ class EditCampusContainer extends Component {
     componentDidMount() {
         //getting student ID from url
         this.props.fetchAllCampuses();
+        this.props.fetchAllStudents();
         this.props.fetchCampus(this.props.match.params.id);
 
     }
@@ -108,6 +109,11 @@ class EditCampusContainer extends Component {
         event.preventDefault();  // Prevent browser reload/refresh after submit.
         if (this.state.firstname == null || this.state.lastname == null || this.state.firstname == "" || this.state.lastname == "" || !this.state.firstname.replace(/\s/g, '').length || !this.state.lastname.replace(/\s/g, '').length) {
             alert("First and Last name cannot both be empty.  Please fill out those following fields.");
+            return;
+        }
+
+        if (this.state.gpa > 4 || this.state.gpa < 0) {
+            alert("Student GPA cannot be less than 0 or greater than 4");
             return;
         }
 
